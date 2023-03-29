@@ -1,0 +1,12 @@
+import json
+import os
+
+def lambda_handler(event, context):
+    # TODO implement
+    json_data = json.loads(event)
+    payload = {'text': 'Issue Created: {}'.format(json_data['issue']['html_url'])}
+    client = http.client.HTTPConnection()
+    web_request = http.client.HTTPMethod.Post(os.environ['SLACK_URL'], content=json.dumps(payload), encoding='utf-8',content_type = 'application/json')
+    response = client.send(web_request)
+    reader = response.content.read_as_stream()
+    return reader.read_to_end()
